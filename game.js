@@ -7,7 +7,7 @@ const starTrack = document.getElementById("starTrack");
 const result = document.getElementById("result");
 const resultText = document.getElementById("resultText");
 const mistakesText = document.getElementById("mistakes");
-const speedConfig = {turtle:0.22,horse:0.42,cheetah:0.68};
+const speedConfig = {turtle:0.08,horse:0.14,cheetah:0.22};
 const colors = ["#ffb8c8","#a9d9ff","#ffe49b","#c9f0cb","#d9c5ff","#ffc99f","#aeece8"];
 // Allowed non-prime labels; 3 and 7 are explicit exceptions.
 const isAllowedLabel = n => ![2,5,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97].includes(n) || n===3 || n===7;
@@ -15,9 +15,10 @@ let table=3, speed="horse", bubbles=[], caught=new Set(), errors=[], startedAt=0
 const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
 function rowResults(t){return Array.from({length:10},(_,i)=>t*(i+1));}
 function validDistractors(targets){
-  const set=new Set(targets), out=[];
-  for(let n=1;n<=90;n++) if(!set.has(n)&&isAllowedLabel(n)) out.push(n);
-  return out;
+  // Ablenker sind ausschließlich Produkte einer der sechs angebotenen Reihen,
+  // jeweils höchstens bis 10×; keine Produkte der gerade gespielten Reihe.
+  const active=new Set(targets);
+  return PRODUCT_POOL.filter(n=>!active.has(n));
 }
 function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 function clear(){bubbles.forEach(b=>b.el.remove());bubbles=[];arena.innerHTML="";starTrack.innerHTML="";}
@@ -51,6 +52,10 @@ function tap(b){
     const star=document.createElement("span");star.className="star";star.textContent="⭐";
     star.style.left=b.x+"px";star.style.top=b.y+"px";arena.appendChild(star);
     setTimeout(()=>star.remove(),520);
+    // Erfolgsspur: Sterne bleiben in Fangreihenfolge unten stehen.
+    const trackStar=document.createElement("span");trackStar.className="track-star";
+    trackStar.textContent="⭐";trackStar.setAttribute("aria-label",`Gefangen: ${b.value}`);
+    starTrack.appendChild(trackStar);
     // The persistent success star is added in the order the facts are caught.
     const earned=document.createElement("span");earned.className="track-star";earned.textContent="⭐";
     earned.setAttribute("aria-label",`Ergebnis ${b.value} gefangen`);starTrack.appendChild(earned);

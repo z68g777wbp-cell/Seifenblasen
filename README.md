@@ -12,7 +12,7 @@ Ein eigenständiges, statisches Lernspiel für Malreihen (3, 4, 6, 7, 8, 9).
 - Richtige Blasen platzen; ein Stern erscheint kurz und wandert danach als dauerhafter Stern in die Erfolgsleiste.
 - Falsche Treffer werden im Hintergrund protokolliert und in der Abschlussauswertung mit konkreten Zahlen angezeigt.
 - Die Zeit läuft im Hintergrund; bei Abschluss wird ein `denkavo:game-complete`-Event ausgelöst.
-- Beschriftungen vermeiden Primzahlen, mit Ausnahme von 3 und 7 (keine Primzahl wird als falscher Ablenker verwendet).
+- Alle Blasen zeigen ausschließlich Produkte der Reihen 3, 4, 6, 7, 8 oder 9 bis maximal 10×. Es erscheinen keine darüber hinausgehenden Vielfachen und keine fremden Zahlen. In den angebotenen Reihen kommen als Primzahl-Ergebnisse nur 3 und 7 vor.
 
 ## Integration in DENKAVO
 Das Spiel sendet bei Abschluss ein Browser-Event:
