@@ -31,3 +31,4 @@ Repository erstellen, diese Dateien hochladen und in GitHub unter **Settings →
 - `index.html` – Oberfläche
 - `styles.css` – responsive Darstellung
 - `game.js` – Spielablauf und Auswertung
+\n\n**Blasenzahlen:** Es erscheinen nur die im Spielcode festgelegten Zahlen (Whitelist). Fehlende Ergebnisse der gerade gewählten Malreihe werden bei Bedarf ergänzt. Alle drei Geschwindigkeiten wurden weiter reduziert.\n

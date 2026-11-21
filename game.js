@@ -7,10 +7,12 @@ const starTrack = document.getElementById("starTrack");
 const result = document.getElementById("result");
 const resultText = document.getElementById("resultText");
 const mistakesText = document.getElementById("mistakes");
-const speedConfig = {turtle:0.08,horse:0.14,cheetah:0.22};
+// Alle drei Bewegungsstufen nochmals deutlich verlangsamt.
+const speedConfig = {turtle:0.035,horse:0.06,cheetah:0.09};
 const colors = ["#ffb8c8","#a9d9ff","#ffe49b","#c9f0cb","#d9c5ff","#ffc99f","#aeece8"];
-// Allowed non-prime labels; 3 and 7 are explicit exceptions.
-const isAllowedLabel = n => ![2,5,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97].includes(n) || n===3 || n===7;
+// Ausschließlich die ausdrücklich freigegebenen Blasenzahlen.
+const ALLOWED_LABELS = [3,4,5,6,7,9,10,12,14,15,16,18,20,21,24,25,27,28,30,32,35,36,40,42,45,48,49,50,54,56,60,63,64,70,72,80,81,90];
+const PRODUCT_POOL = [...new Set(ALLOWED_LABELS)];
 let table=3, speed="horse", bubbles=[], caught=new Set(), errors=[], startedAt=0, elapsed=0, running=false, raf=0, last=0, spawnClock=0, nextId=1;
 const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
 function rowResults(t){return Array.from({length:10},(_,i)=>t*(i+1));}
@@ -18,7 +20,10 @@ function validDistractors(targets){
   // Ablenker sind ausschließlich Produkte einer der sechs angebotenen Reihen,
   // jeweils höchstens bis 10×; keine Produkte der gerade gespielten Reihe.
   const active=new Set(targets);
-  return PRODUCT_POOL.filter(n=>!active.has(n));
+  // Falls ein benötigtes Ergebnis einmal nicht in der Liste enthalten ist,
+  // wird genau dieses Ergebnis als zusätzliche zulässige Blase ergänzt.
+  const permitted=[...new Set([...PRODUCT_POOL,...targets])];
+  return permitted.filter(n=>!active.has(n));
 }
 function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 function clear(){bubbles.forEach(b=>b.el.remove());bubbles=[];arena.innerHTML="";starTrack.innerHTML="";}
