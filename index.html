@@ -1,34 +1,40 @@
 <!doctype html>
-<html lang="de-AT">
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#eaf6ff">
-  <title>Seifenblasen – Malreihen</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#2456a6">
+<title>DENKAVO · Seifenblasen</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="app" aria-label="Seifenblasen Malreihen-Lernspiel">
-    <header class="topbar">
-      <div class="brand"><span class="brand-bubble" aria-hidden="true">✦</span><div><h1>Seifenblasen</h1><p>Fange die Ergebnisse deiner Malreihe!</p></div></div>
-      <div class="controls">
-        <section class="control-group" aria-label="Malreihe auswählen"><span class="control-label">Malreihe</span><div class="row-buttons" id="tables">
-          <button class="table-btn active" data-table="3" aria-pressed="true">3</button><button class="table-btn" data-table="4" aria-pressed="false">4</button><button class="table-btn" data-table="6" aria-pressed="false">6</button><button class="table-btn" data-table="7" aria-pressed="false">7</button><button class="table-btn" data-table="8" aria-pressed="false">8</button><button class="table-btn" data-table="9" aria-pressed="false">9</button>
-        </div></section>
-        <section class="control-group" aria-label="Geschwindigkeit auswählen"><span class="control-label">Tempo</span><div class="row-buttons speed-buttons">
-          <button class="speed-btn" data-speed="turtle" aria-pressed="false"><span>🐢</span><small>Schildkröte</small></button><button class="speed-btn active" data-speed="horse" aria-pressed="true"><span>🐎</span><small>Pferd</small></button><button class="speed-btn" data-speed="cheetah" aria-pressed="false"><span>🐆</span><small>Gepard</small></button>
-        </div></section>
-      </div>
-    </header>
-    <section class="progress-line" aria-live="polite"><div class="progress-text"><span id="progress">0 von 10 Sternen</span><span id="clock">00:00</span></div><div class="progress-track"><div id="progressFill"></div></div></section>
-    <section class="play-area" id="playArea" aria-label="Spielfeld mit beweglichen Seifenblasen">
-      <div class="watermark" aria-hidden="true">DENKAVO · MATHE</div>
-      <div id="bubbleLayer"></div>
-      <div id="starLayer" aria-label="Gefangene Ergebnisse"></div>
-      <div id="finishOverlay" class="finish-overlay" hidden><div class="finish-card"><div class="finish-icon">🌟</div><h2>Geschafft!</h2><p>Du hast alle 10 Ergebnisse gefangen.</p><div class="result-time" id="finalTime">Zeit: 00:00</div><p class="mistakes" id="mistakes">Falsch angetippt: 0</p><button id="againBtn" class="primary-btn">Noch einmal spielen</button></div></div>
-    </section>
-    <footer class="footer"><span>Tippe auf eine Blase. Falsche Ergebnisse zählen mit.</span><button id="restartBtn" class="quiet-btn" title="Runde neu starten">↻ Neu starten</button></footer>
-  </main>
-  <script src="game.js"></script>
+<main class="app">
+  <header class="top">
+    <div class="brand"><span class="mark">D</span><span>DENKAVO</span></div>
+    <div class="heading"><h1>Seifenblasen</h1><p>Fange die Ergebnisse deiner Malreihe!</p></div>
+  </header>
+  <section class="toolbar" aria-label="Malreihe wählen">
+    <div class="tables" id="tables">
+      <button class="table-btn active" data-table="3">3</button><button class="table-btn" data-table="4">4</button>
+      <button class="table-btn" data-table="6">6</button><button class="table-btn" data-table="7">7</button>
+      <button class="table-btn" data-table="8">8</button><button class="table-btn" data-table="9">9</button>
+    </div>
+    <div class="speeds" aria-label="Geschwindigkeit">
+      <button class="speed-btn" data-speed="turtle" title="Langsam" aria-label="Langsam">🐢</button>
+      <button class="speed-btn active" data-speed="horse" title="Mittel" aria-label="Mittel">🐎</button>
+      <button class="speed-btn" data-speed="cheetah" title="Schnell" aria-label="Schnell">🐆</button>
+    </div>
+  </section>
+  <section class="game-wrap">
+    <div class="hud"><span class="pill">Gefangen: <b id="progress">0 / 10</b></span><span class="pill">Zeit: <b id="timer">0:00</b></span><button id="restart" class="small-btn">Neu starten ↻</button></div>
+    <div id="arena" class="arena" aria-label="Spielfeld mit Seifenblasen"></div>
+    <div class="star-track" id="starTrack" aria-label="Gesammelte Sterne"></div>
+  </section>
+  <section id="result" class="result" hidden>
+    <div class="result-card"><div class="celebrate">✨🌟✨</div><h2>Geschafft!</h2><p id="resultText"></p><p id="mistakes"></p><button id="again" class="primary">Noch einmal spielen</button></div>
+  </section>
+  <footer>Tippe auf die Blase mit dem Ergebnis. Viel Erfolg!</footer>
+</main>
+<script src="game.js"></script>
 </body>
 </html>
