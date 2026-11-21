@@ -1,0 +1,8 @@
+{
+  "name": "denkavo-seifenblasen-lernspiel",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Responsive Seifenblasen-Malreihen-Lernspiel für DENKAVO",
+  "scripts": {"test": "node test/smoke.js"},
+  "license": "UNLICENSED"
+}

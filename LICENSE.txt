@@ -1,0 +1,10 @@
+DENKAVO – Seifenblasen Lernspiel
+Copyright (c) 2026 DENKAVO. All rights reserved.
+
+Dieses Repository und der enthaltene Quellcode sind urheberrechtlich geschützt.
+Ohne vorherige schriftliche Genehmigung von DENKAVO ist es nicht gestattet,
+Quellcode oder wesentliche Teile davon zu vervielfältigen, weiterzuverbreiten,
+öffentlich bereitzustellen, zu verändern oder kommerziell zu nutzen.
+
+Die Veröffentlichung auf GitHub bedeutet keine Einräumung einer Open-Source-
+Lizenz. Alle Rechte bleiben vorbehalten.
